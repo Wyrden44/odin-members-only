@@ -10,7 +10,7 @@
     <title>Members Only</title>
 </head>
 <body>
-    <%- include("nav") %>
+    <%- include("nav", {user}) %>
     <main>
         <% if (locals.subpage && locals.subargs) {%>
             <%- include(subpage, subargs) %>

@@ -7,8 +7,10 @@ mainRouter.get("/", (req, res) => {
     res.redirect("/chat")
 });
 
-mainRouter.get("/chat", (req, res) => {
-    res.render("index", {subpage: "chat", subargs: {title: "Chat"}, user: req.user });
+mainRouter.get("/chat", async (req, res) => {
+    const messages = await db.getMessages();
+    console.log(messages);
+    res.render("index", {subpage: "chat", subargs: {title: "Chat", messages}, user: req.user });
 });
 
 mainRouter.post("/chat", (req, res) => {
