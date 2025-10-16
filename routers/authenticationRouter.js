@@ -46,12 +46,12 @@ passport.deserializeUser(async (id, done) => {
 
 authenticationRouter.get("/login", (req, res) => {
     console.log(req.session.messages)
-    res.render("index", {title: "Log In", user: req.user, subpage: "login", subargs: {}});
+    res.render("index", {user: req.user, subpage: "login", subargs: {title: "Log In"}});
 });
 
 authenticationRouter.get("/signup", (req, res) => {
     console.log(req.session.messages)
-    res.render("index", {title: "Sign Up", user: req.user, subpage: "signup", subargs: {}});
+    res.render("index", {user: req.user, subpage: "signup", subargs: {title: "Sign Up"}});
 });
 
 authenticationRouter.post("/login/password", passport.authenticate("local", {

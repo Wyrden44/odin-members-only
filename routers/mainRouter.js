@@ -8,7 +8,7 @@ mainRouter.get("/", (req, res) => {
 });
 
 mainRouter.get("/chat", (req, res) => {
-    res.render("index", {title: "Chat", subpage: "chat", subargs: {}, user: req.user });
+    res.render("index", {subpage: "chat", subargs: {title: "Chat"}, user: req.user });
 });
 
 mainRouter.post("/chat", (req, res) => {
