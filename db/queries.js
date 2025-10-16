@@ -21,3 +21,7 @@ exports.getUserByUsername = async function(username) {
 exports.addUser = async function(username, hashedPassword) {
     await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [username, hashedPassword]);
 }
+
+exports.addMessage = async function(user, message, date) {
+    await pool.query("INSERT INTO messages (username, message, date) VALUES ($1, $2, $3)", [user, message, date]);
+}
