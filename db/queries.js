@@ -22,13 +22,13 @@ exports.addUser = async function(username, hashedPassword) {
     await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [username, hashedPassword]);
 }
 
-exports.addMessage = async function(username, message, date) {
-    const user = await getUserByUsername(username);
-    await pool.query("INSERT INTO messages (user, text, time) VALUES ($1, $2, $3)", [user.id, message, date]);
+exports.addMessage = async function(user, message, date) {
+    await pool.query("INSERT INTO messages (userId, text, time) VALUES ($1, $2, $3)", [user, message, date]);
 }
 
 exports.getMessages = async function() {
     const { rows } = await pool.query("SELECT (email, time, text) FROM messages LEFT JOIN users ON messages.userId = users.id");
+    console.log(rows);
     const res = [];
     // transform row strings into objects
     for (let {row} of rows) {
@@ -36,7 +36,7 @@ exports.getMessages = async function() {
         let [user, time, text] = row.split(",");
         user = user.slice(1);
         time = time.slice(1, -1);
-        text = text.slice(1, -2);
+        text = text.slice(0, -1);
         res.push({user, time, text});
     }
     return res;

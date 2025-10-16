@@ -13,11 +13,14 @@ mainRouter.get("/chat", async (req, res) => {
     res.render("index", {subpage: "chat", subargs: {title: "Chat", messages}, user: req.user });
 });
 
-mainRouter.post("/chat", (req, res) => {
-    const {message} = req.query;
-    const {email} = req.user;
-    // TODO: validation and formatting
-    db.addMessage(email, message, Date.now());
+mainRouter.post("/chat", async (req, res) => {
+    const {message} = req.body;
+    const {email} = req.user || {email: "sample (not logged in)"};
+    const now = new Date(Date.now()).toISOString();
+    const {id} = await db.getUserByUsername(email) || {id: 1};
+    console.log(id, message, now);
+    db.addMessage(id, message, now);
+    res.redirect("/");
 });
 
 mainRouter.use(authenticationRouter);
