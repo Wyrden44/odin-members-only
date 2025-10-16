@@ -1,8 +1,9 @@
 <section class="chat">
+    <h1><%= title %></h1>
     <div class="prev-messages">
 
     </div>
-    <form method="pos" action="/chat" class="add-message">
+    <form method="post" action="/chat" class="add-message">
         <label for="message">Message:</label>
         <input type="text" name="message" id="message">
         <button type="submit">Submit</button>
