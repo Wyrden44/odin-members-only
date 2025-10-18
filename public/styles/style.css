@@ -3,8 +3,11 @@ body {
     --text: #0b1319;
     --background: #eff5fb;
     --primary: #184f7c;
+    --primary80: #184f7cbb;
     --secondary: #6fb9f1;
+    --secondary20: hsl(206, 82%, 69%, 20%);
     --accent: #058cfa;
+    --grey: #c8c8c8;
 
     --nav-height: 50px;
 
@@ -73,10 +76,60 @@ main {
 /* Chat */
 
 .chat {
-    height: calc(100vh - var(--nav-height) - 20px);
-    border: 1px solid black;
-    max-width: 1500px;
+    --chat-margin: 30px;
+    height: calc(100vh - var(--nav-height) - 20px - var(--chat-margin));
+    width: clamp(500px, 90%, 1500px);
     flex: 1;
+
+    background-color: var(--secondary20);
+    padding: 20px;
+    border-radius: 15px;
+
+    display: grid;
+    grid-template-rows: 50px 1fr 50px;
+}
+
+.prev-message {
+    width: min(500px,  80%);
+    background-color: var(--primary80);
+    border-radius: 15px;
+    margin: 10px 0;
+    padding: 10px 15px;
+}
+
+.message-header {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+
+.add-message {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#message {
+    flex: 1;
+    padding: 10px;
+    border-radius: 30px;
+    height: 35px;
+    border: none;
+}
+
+.add-message button {
+    font-weight: bold;
+    background-color: var(--accent);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* footer */

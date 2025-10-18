@@ -4,8 +4,8 @@
         <% for (let message of messages) { %>
             <div class="prev-message">
                 <div class="message-header">
-                    <p><%=message.time %></p>
                     <p><%=message.user%></p>
+                    <p><%=message.time %></p>
                 </div>
                 <div class="message-content">
                     <p><%= message.text %></p>
@@ -14,8 +14,7 @@
         <% } %>
     </div>
     <form method="post" action="/chat" class="add-message">
-        <label for="message">Message:</label>
-        <input type="text" name="message" id="message">
-        <button type="submit">Submit</button>
+        <input aria-label="message" placeholder="Message..." type="text" name="message" id="message">
+        <button type="submit">></button>
     </form>
 </section>
