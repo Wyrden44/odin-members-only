@@ -10,6 +10,7 @@ mainRouter.get("/", (req, res) => {
 mainRouter.get("/chat", async (req, res) => {
     const messages = await db.getMessages();
     console.log(messages);
+    console.log(req.user)
     res.render("index", {subpage: "chat", subargs: {title: "Chat", messages}, user: req.user });
 });
 

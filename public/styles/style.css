@@ -97,6 +97,11 @@ main {
     padding: 10px 15px;
 }
 
+.user-message {
+    background-color: var(--accent);
+    margin-left: auto;
+}
+
 .message-header {
     display: flex;
     gap: 10px;

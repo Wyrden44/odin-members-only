@@ -2,7 +2,7 @@
     <h1><%= title %></h1>
     <div class="prev-messages">
         <% for (let message of messages) { %>
-            <div class="prev-message">
+            <div class="prev-message <%= (message.user === user.email) ? "user-message" : "other-message" %>">
                 <div class="message-header">
                     <p><%=message.user%></p>
                     <p><%=message.time %></p>
