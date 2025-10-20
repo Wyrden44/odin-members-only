@@ -9,9 +9,12 @@ mainRouter.get("/", (req, res) => {
 
 mainRouter.get("/chat", async (req, res) => {
     const messages = await db.getMessages();
-    console.log(messages);
-    console.log(req.user)
     res.render("index", {subpage: "chat", subargs: {title: "Chat", messages}, user: req.user });
+});
+
+mainRouter.get("/profile", async (req, res) => {
+    console.log(req.user);
+    res.render("index", {subpage: "profile", subargs: {title: "Chat", user: req.user}, user: req.user});
 });
 
 mainRouter.post("/chat", async (req, res) => {

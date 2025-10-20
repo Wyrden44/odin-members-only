@@ -1,0 +1,22 @@
+<section class="profile">
+    <h1>Welcome, <%= user.firstname %> <%= user.lastname %></h1>
+    <h1>Profile:</h1>
+    <div class="profile-info">
+        <div class="profile-info-section">
+            <p class="profile-label">Firstname: </p>
+            <p class="profile-info"><%= user.firstname %></p>
+        </div>
+        <div class="profile-info-section">
+            <p class="profile-label">Lastname: </p>
+            <p class="profile-info"><%= user.lastname %></p>
+        </div>
+        <div class="profile-info-section">
+            <p class="profile-label">Email: </p>
+            <p class="profile-info"><%= user.email %></p>
+        </div>
+        <div class="profile-info-section">
+            <p class="profile-label">Membership: </p>
+            <p class="profile-info"><%= user.membership %></p>
+        </div>
+    </div>
+</section>
