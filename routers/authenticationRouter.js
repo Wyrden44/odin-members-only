@@ -45,7 +45,6 @@ passport.deserializeUser(async (id, done) => {
 });
 
 authenticationRouter.get("/login", (req, res) => {
-    console.log(req.session.messages)
     res.render("index", {user: req.user, subpage: "login", subargs: {title: "Log In"}});
 });
 
@@ -62,9 +61,11 @@ authenticationRouter.post("/login/password", passport.authenticate("local", {
 
 authenticationRouter.post("/signup", async (req, res, next) => {
     try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        await db.addUser(req.body.username, hashedPassword);
-        res.redirect("/");
+        const {firstname, lastname, username, password} = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await db.addUser(firstname, lastname, username, 1, hashedPassword);
+        console.log(req.user);
+        res.redirect("/login");
     } catch (error) {
         console.error(error);
         next(error);
