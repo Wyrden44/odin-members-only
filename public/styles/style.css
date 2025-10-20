@@ -66,6 +66,17 @@ nav {
     font-size: 1rem;
 }
 
+.profile-link a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-link img {
+    width: auto;
+    height: 1.5rem;
+}
+
 /* Main */
 
 main {
