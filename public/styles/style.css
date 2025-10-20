@@ -66,17 +66,20 @@ nav {
     font-size: 1rem;
 }
 
-.profile-link a {
+.links img {
+    width: auto;
+    height: 1.5rem;
+}
+
+.profile-link a, .logout-link button {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.profile-link img {
-    width: auto;
-    height: 1.5rem;
+.logout-link button {
+    background-color: transparent;
 }
-
 /* Main */
 
 main {
