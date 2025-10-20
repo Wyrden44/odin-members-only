@@ -27,6 +27,13 @@ mainRouter.post("/chat", async (req, res) => {
     res.redirect("/");
 });
 
+mainRouter.post('/logout', function(req, res, next){
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
+});
+
 mainRouter.use(authenticationRouter);
 
 module.exports = mainRouter;

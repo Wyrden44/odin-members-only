@@ -2,6 +2,22 @@
     <h1 class="header">Member's Only</h1>
     <ul class="links">
         <li><a href="/chat">Chat</a></li>
-        <li class="profile-link"><a href="/profile"><img src="/icons/profile.png" alt="Profile"></a></li>
+        <% if (user) { %>
+            <li class="profile-link">
+                <a href="/profile"><img src="/icons/profile.png" alt="Profile"></a>
+            </li>
+            <li class="logout-link">
+                <form action="/logout" method="post">
+                    <button type="submit" class="logout-link"><img src="/icons/logout.png" alt="Log Out"></button>
+                </form>
+            </li>
+        <% } else { %>
+            <li class="login-link">
+                <a href="/login">Log In</a>
+            </li>
+            <li class="signup-link">
+                <a href="/signup">Sign Up</a>
+            </li>
+        <% } %>
     </ul>
 </nav>
