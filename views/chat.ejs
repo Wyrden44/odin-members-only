@@ -15,6 +15,14 @@
     </div>
     <form method="post" action="/chat" class="add-message">
         <input aria-label="message" placeholder="Message..." type="text" name="message" id="message">
-        <button type="submit">></button>
+        <button type="submit" onclick=onButtonClick>></button>
     </form>
+    <script>
+        const container = document.querySelector(".prev-messages");
+        container.scrollTop = container.scrollHeight;
+
+        function onButtonClick() {
+            container.scrollTop = container.scrollHeight;
+        }
+    </script>
 </section>

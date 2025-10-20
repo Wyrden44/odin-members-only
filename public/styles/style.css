@@ -76,8 +76,9 @@ main {
 /* Chat */
 
 .chat {
-    --chat-margin: 30px;
-    height: calc(100vh - var(--nav-height) - 20px - var(--chat-margin));
+    --chat-margin: 20px;
+    margin: var(--chat-margin) 0;
+    max-height: calc(100vh - var(--nav-height) - 20px - var(--chat-margin));
     width: clamp(500px, 90%, 1500px);
     flex: 1;
 
@@ -87,6 +88,16 @@ main {
 
     display: grid;
     grid-template-rows: 50px 1fr 50px;
+}
+
+.chat h1 {
+    text-align: center;
+}
+
+.prev-messages {
+    padding-right: 10px;
+    overflow-y: auto;
+    min-height: 0;
 }
 
 .prev-message {
