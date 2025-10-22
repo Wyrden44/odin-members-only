@@ -65,7 +65,7 @@ authenticationRouter.post("/signup", async (req, res, next) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         await db.addUser(firstname, lastname, username, 1, hashedPassword);
         console.log(req.user);
-        res.redirect("/login");
+        res.redirect("/");
     } catch (error) {
         console.error(error);
         next(error);

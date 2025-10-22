@@ -3,7 +3,8 @@ body {
     --text: #0b1319;
     --background: #eff5fb;
     --primary: #184f7c;
-    --primary80: #184f7cbb;
+    --primary80: #184f7caa;
+    --primary-120: #143f63;
     --secondary: #6fb9f1;
     --secondary20: hsl(206, 82%, 69%, 20%);
     --accent: #058cfa;
@@ -124,6 +125,15 @@ main {
     padding: 10px 15px;
 }
 
+.prev-message-user {
+    font-size: 0.85rem;
+}
+
+.prev-message-time {
+    font-size: 0.9rem;
+    color: var(--primary-120);
+}
+
 .user-message {
     background-color: var(--accent);
     margin-left: auto;
@@ -134,10 +144,8 @@ main {
     gap: 10px;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
-
-
 
 .add-message {
     display: flex;
@@ -168,7 +176,7 @@ main {
 
 .profile {
     width: 100%;
-    
+
     margin-top: 20px;
     display: flex;
     flex-direction: column;

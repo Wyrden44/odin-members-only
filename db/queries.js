@@ -33,8 +33,14 @@ exports.getMessages = async function() {
     for (let {row} of rows) {
         let [user, time, text] = row.split(",");
         user = user.slice(1);
-        time = time.slice(1, -1);
-        text = text.slice(0, -1);
+        time = time.slice(0, -1) + "Z";
+        
+        if (text.charAt(0) == '"') {
+            text = text.slice(1, -2);
+        }
+        else {
+            text = text.slice(0, -1);
+        }
         res.push({user, time, text});
     }
     return res;

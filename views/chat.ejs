@@ -4,8 +4,8 @@
         <% for (let message of messages) { %>
             <div class="prev-message <%= (message.user === user?.email) ? "user-message" : "other-message" %>">
                 <div class="message-header">
-                    <p><%=message.user%></p>
-                    <p><%=message.time %></p>
+                    <p class="prev-message-user"><%=message.user%></p>
+                    <p class="prev-message-time"><%=message.time %></p>
                 </div>
                 <div class="message-content">
                     <p><%= message.text %></p>
