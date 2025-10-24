@@ -9,7 +9,6 @@ const intervals = {
 
 function getTimeAgo (date) {
     const now = new Date(Date.now());
-    console.log(now.toISOString(), date);
     const seconds =  Math.floor((now - new Date(date)) / 1000);
 
     let minCount = 10000;

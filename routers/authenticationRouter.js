@@ -15,7 +15,6 @@ passport.use(new LocalStrategy(async (username, password, done) => {
         }
 
         const match = await bcrypt.compare(password, user.password);
-        console.log(match, password, user.password)
         
         if (!match) {
             return done(null, false, {message: "Incorrect password"});
@@ -49,14 +48,13 @@ authenticationRouter.get("/login", (req, res) => {
 });
 
 authenticationRouter.get("/signup", (req, res) => {
-    console.log(req.session.messages)
     res.render("index", {user: req.user, subpage: "signup", subargs: {title: "Sign Up"}});
 });
 
 authenticationRouter.post("/login/password", passport.authenticate("local", {
     successRedirect: "/",
     failureMessage: true,
-    failureRedirect: "/"
+    failureRedirect: "/login"
 }));
 
 authenticationRouter.post("/signup", async (req, res, next) => {
@@ -64,8 +62,7 @@ authenticationRouter.post("/signup", async (req, res, next) => {
         const {firstname, lastname, username, password} = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
         await db.addUser(firstname, lastname, username, 1, hashedPassword);
-        console.log(req.user);
-        res.redirect("/");
+        res.redirect("/login");
     } catch (error) {
         console.error(error);
         next(error);
