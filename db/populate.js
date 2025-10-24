@@ -1,6 +1,12 @@
 const {Client} = require("pg");
 require("dotenv").config();
 
+const DROP = `
+    DROP TABLE IF EXISTS messages;
+    DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS memberships;
+`;
+
 const CREATE = `
     CREATE TABLE IF NOT EXISTS memberships (
         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -24,15 +30,9 @@ const CREATE = `
     );
 `;
 
-const CLEAR = `
-    DELETE FROM users;
-    DELETE FROM messages;
-    DELETE FROM memberships;
-`;
-
 const POPULATE = `
     INSERT INTO memberships (name) VALUES
-        ('baisc'),
+        ('basic'),
         ('premium');
 
     INSERT INTO users (firstname, lastname, email, membership, password) VALUES
@@ -49,8 +49,8 @@ async function main() {
     });
     await client.connect();
     console.log("connected", process.env.CONNECTION_STRING);
+    await client.query(DROP);
     await client.query(CREATE);
-    await client.query(CLEAR);
     await client.query(POPULATE);
     await client.end();
     console.log("success!");
