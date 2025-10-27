@@ -73,6 +73,23 @@ nav {
     height: 1.5rem;
 }
 
+.login-link {
+    background-color: var(--accent);
+}
+
+.signup-link, .login-link {
+    padding: 10px;
+    border-radius: 7px;
+
+    transition: background-color 0.3s ease;
+}
+
+.signup-link:hover {
+    background-color: var(--accent);
+
+    cursor: pointer;
+}
+
 .profile-link a, .logout-link button {
     display: flex;
     justify-content: center;
