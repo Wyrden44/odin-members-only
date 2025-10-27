@@ -15,6 +15,7 @@ mainRouter.get("/chat", async (req, res) => {
 });
 
 mainRouter.get("/profile", async (req, res) => {
+    console.log(req.user)
     res.render("index", {subpage: "profile", subargs: {title: "Chat", user: req.user}, user: req.user});
 });
 

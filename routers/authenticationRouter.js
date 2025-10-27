@@ -19,7 +19,7 @@ passport.use(new LocalStrategy(async (username, password, done) => {
         if (!match) {
             return done(null, false, {message: "Incorrect password"});
         }
-
+        
         return done(null, user);
     }
     catch (err) {
