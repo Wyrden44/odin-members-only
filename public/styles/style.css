@@ -190,6 +190,18 @@ main {
     justify-content: center;
 }
 
+.delete-message-button {
+    padding: 5px;
+    background-color: transparent;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+.delete-message-button:hover {
+    background-color: red;
+    border: 1px solid red;
+}
+
 /* profile */
 
 .profile {
