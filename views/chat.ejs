@@ -19,6 +19,12 @@
                             )
                         %>
                     </p>
+                    <% if (user?.membership == "admin") { %>
+                        <% console.log(message) %>
+                        <form action="chat/delete/<%= message.id %>" method="post">
+                            <button type="submit" class="deleteMessage">delete</button>
+                        </form>
+                    <% } %>
                     <p class="prev-message-time"><%= (user) ? message.time : message.time.replace(/^(\S+\s\S+)/, match => "*".repeat(match.length)) %></p>
                 </div>
                 <div class="message-content">

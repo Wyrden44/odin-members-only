@@ -33,7 +33,8 @@ const CREATE = `
 const POPULATE = `
     INSERT INTO memberships (name) VALUES
         ('basic'),
-        ('premium');
+        ('premium'),
+        ('admin');
 
     INSERT INTO users (firstname, lastname, email, membership, password) VALUES
         ('admin', 'admin', 'admin@sample.com', '1', '1234');

@@ -28,6 +28,19 @@ mainRouter.post("/chat", async (req, res) => {
     res.redirect("/");
 });
 
+mainRouter.post("/chat/delete/:messageId", (req, res) => {
+  const {messageId} = req.params;
+  
+  // validate user membership
+  if (req.user?.membership != "admin") {
+    res.redirect("/chat");
+  }
+
+  db.removeMessage(messageId);
+
+  res.redirect("/chat");
+});
+
 mainRouter.post('/logout', function(req, res, next){
   req.logout(function(err) {
     if (err) { return next(err); }
