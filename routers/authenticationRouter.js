@@ -3,6 +3,8 @@ var LocalStrategy = require('passport-local');
 var bcrypt = require('bcryptjs');
 const passport = require("passport");
 const db = require("../db/queries");
+const formValidator = require("../controllers/formValidator");
+const { validationResult } = require("express-validator");
 
 const authenticationRouter = Router();
 
@@ -51,13 +53,31 @@ authenticationRouter.get("/signup", (req, res) => {
     res.render("index", {user: req.user, subpage: "signup", subargs: {title: "Sign Up"}});
 });
 
-authenticationRouter.post("/login/password", passport.authenticate("local", {
-    successRedirect: "/",
-    failureMessage: true,
-    failureRedirect: "/login"
+authenticationRouter.post("/login/password", 
+    formValidator.loginValidator,
+    (req, res, next) => {
+        const errors = validationResult(req).array();
+        if (errors.length !== 0) {
+            return res.render("index", {user: req.user, subpage: "login", subargs: {title: "Log In", errors}});
+        }
+        next();
+    },
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureMessage: true,
+        failureRedirect: "/login"
 }));
 
-authenticationRouter.post("/signup", async (req, res, next) => {
+authenticationRouter.post("/signup",
+    formValidator.signupValidator,
+    (req, res, next) => {
+        const errors = validationResult(req).array();
+        if (errors.length !== 0) {
+            return res.render("index", {user: req.user, subpage: "signup", subargs: {title: "Sign Up", errors}});
+        }
+        next();
+    },
+    async (req, res, next) => {
     try {
         const {firstname, lastname, username, password} = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -68,7 +88,5 @@ authenticationRouter.post("/signup", async (req, res, next) => {
         next(error);
     }
 });
-
-
 
 module.exports = {authenticationRouter};

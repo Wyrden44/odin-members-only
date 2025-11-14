@@ -3,6 +3,8 @@ const {authenticationRouter} = require("./authenticationRouter");
 const db = require("../db/queries");
 const mainRouter = Router();
 const helper = require("../util/helper");
+const formValidator = require("../controllers/formValidator.js");
+const { validationResult } = require("express-validator");
 
 mainRouter.get("/", (req, res) => {
     res.redirect("/chat")
@@ -19,21 +21,46 @@ mainRouter.get("/profile", async (req, res) => {
     res.render("index", {subpage: "profile", subargs: {title: "Chat", user: req.user}, user: req.user});
 });
 
-mainRouter.post("/chat", async (req, res) => {
-    const {message} = req.body;
-    const {email} = req.user || {email: "sample (not logged in)"};
-    const now = new Date(Date.now()).toISOString();
-    const {id} = await db.getUserByUsername(email) || {id: 1};
-    db.addMessage(id, message, now);
-    res.redirect("/");
+mainRouter.post("/chat", 
+    formValidator.messageValidator,
+    async (req, res, next) => {
+      const errors = validationResult(req).array();
+
+      if (errors.length !== 0) {
+        errors.forEach(err => {
+          console.log("Error when sending message:", err.msg);
+        });
+        return res.redirect("/chat");
+      }
+
+      next();
+    },
+    async (req, res) => {
+      const {message} = req.body;
+      const {email} = req.user || {email: "sample (not logged in)"};
+      const now = new Date(Date.now()).toISOString();
+      const {id} = await db.getUserByUsername(email) || {id: 1};
+      db.addMessage(id, message, now);
+      res.redirect("/");
 });
 
-mainRouter.post("/chat/delete/:messageId", (req, res) => {
+mainRouter.post("/chat/delete/:messageId",
+  formValidator.deleteMessageValidator,
+  (req, res, next) => {
+    const errors = validationResult(req).array();
+
+    if (errors.length !== 0) {
+      return res.redirect("/chat");
+    }
+
+    next();
+  },
+  (req, res) => {
   const {messageId} = req.params;
   
   // validate user membership
   if (req.user?.membership != "admin") {
-    res.redirect("/chat");
+    return res.redirect("/chat");
   }
 
   db.removeMessage(messageId);

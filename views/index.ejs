@@ -13,7 +13,7 @@
     <%- include("nav", {user}) %>
     <main>
         <% if (locals.subpage && locals.subargs) {%>
-            <%- include(subpage, subargs) %>
+            <%- include(subpage, {...subargs, errors: subargs.errors}) %>
         <% } %>
     </main>
     <%- include("footer") %>
