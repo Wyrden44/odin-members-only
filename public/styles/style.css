@@ -323,3 +323,22 @@ footer {
     padding: 20px;
     border-top: 1px solid var(--grey);
 }
+
+.errors {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--primary);
+    text-align: center;
+}
+
+.error-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.error {
+    font-size: 1rem;
+    color: red;
+    margin-bottom: 5px;
+}

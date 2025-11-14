@@ -19,14 +19,12 @@
         </div>
         <button type="submit">Sign Up</button>
     </form>
+    <% if (errors) { %>
     <div class="errors">
         <ul class="error-list">
-            <% if (errors) { %>
-                <% console.log(errors) %>
-                <% errors.forEach(err => { %>
-                    <li class="error"><%= err.msg %></li>
-                <% }); %>
-            <% } %>
+            <% errors.forEach(err => { %>
+                <li class="error"><%= err.msg %></li>
+            <% }); %>
         </ul>
-    </div>
+    <% } %>
 </div>
