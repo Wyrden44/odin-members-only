@@ -57,13 +57,22 @@ nav {
 }
 
 .header {
+    display: flex;
+    align-items: center;
     font-size: 1.5rem;
+    text-wrap: nowrap;
+}
+
+.website-logo {
+    height: 2rem;
+    width: auto;
 }
 
 .links {
     display: flex;
     justify-content: start;
     align-items: center;
+    text-wrap: nowrap;
     gap: 30px;
     font-size: 1rem;
 }
@@ -114,7 +123,7 @@ main {
     --chat-margin: 20px;
     margin: var(--chat-margin) 0;
     max-height: calc(100vh - var(--nav-height) - 20px - var(--chat-margin));
-    width: clamp(500px, 90%, 1500px);
+    width: clamp(300px, 90%, 1500px);
     flex: 1;
 
     background-color: var(--secondary20);
@@ -160,6 +169,7 @@ main {
 .message-header {
     display: flex;
     gap: 10px;
+    flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
@@ -341,4 +351,34 @@ footer {
     font-size: 1rem;
     color: red;
     margin-bottom: 5px;
+}
+
+@media (max-width: 500px) {
+    nav .header {
+        font-size: 1.2rem;
+    }
+
+    nav .header img {
+        height: 1.5rem;
+    }
+
+    .links {
+        gap: 15px;
+    }
+
+    nav {
+        padding: 15px;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 410px) {
+    nav .header {
+        display: none;
+    }
+
+    .links {
+        width: 100%;
+        justify-content: end;
+    }
 }
