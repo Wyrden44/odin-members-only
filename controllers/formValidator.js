@@ -1,4 +1,5 @@
 const {body, param} = require("express-validator");
+const db = require("../db/queries");
 
 const loginFields = [
     "username",
@@ -27,7 +28,14 @@ exports.signupValidator = [
     body("lastname").trim()
         .notEmpty().withMessage("Please enter your last name"),
     body("username").trim()
-        .isEmail(),
+        .isEmail()
+        .custom(async value => {
+            const user = await db.getUserByUsername(value);
+
+            if (user != null) {
+                throw new Error("Username already in use");
+            }
+        }),
     body("password").trim()
         .notEmpty().withMessage("Please enter a password"),
     body(signUpFields).isLength({max: 255})
