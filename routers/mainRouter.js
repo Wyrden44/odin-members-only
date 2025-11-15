@@ -17,7 +17,6 @@ mainRouter.get("/chat", async (req, res) => {
 });
 
 mainRouter.get("/profile", async (req, res) => {
-    console.log(req.user)
     res.render("index", {subpage: "profile", subargs: {title: "Chat", user: req.user}, user: req.user});
 });
 
@@ -35,11 +34,20 @@ mainRouter.post("/chat",
 
       next();
     },
-    async (req, res) => {
+    async (req, res, next) => {
+      if (!req.user) {
+        try {
+          throw new Error("You are not logged in!");
+        }
+        catch (err) {
+          next(err);
+        }
+      }
+
       const {message} = req.body;
-      const {email} = req.user || {email: "sample (not logged in)"};
+      const {email} = req.user;
       const now = new Date(Date.now()).toISOString();
-      const {id} = await db.getUserByUsername(email) || {id: 1};
+      const {id} = await db.getUserByUsername(email);
       db.addMessage(id, message, now);
       res.redirect("/");
 });
@@ -68,7 +76,7 @@ mainRouter.post("/chat/delete/:messageId",
   res.redirect("/chat");
 });
 
-mainRouter.post('/logout', function(req, res, next){
+mainRouter.post('/logout', (req, res, next) => {
   req.logout(function(err) {
     if (err) { return next(err); }
     res.redirect('/');

@@ -42,7 +42,6 @@ exports.addMessage = async function(user, message, date) {
 exports.getMessages = async function() {
     const { rows } = await pool.query("SELECT (email, messages.id, time, text) FROM messages LEFT JOIN users ON messages.userId = users.id");
     const res = [];
-    console.log(rows);
     // transform row strings into objects
     for (let {row} of rows) {
         let [user, messageId, time, text] = row.split(",");

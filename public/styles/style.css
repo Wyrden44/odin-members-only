@@ -353,6 +353,17 @@ footer {
     margin-bottom: 5px;
 }
 
+/* error page */
+
+.error-page {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
 @media (max-width: 500px) {
     nav .header {
         font-size: 1.2rem;

@@ -81,10 +81,9 @@ authenticationRouter.post("/signup",
     try {
         const {firstname, lastname, username, password} = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
-        await db.addUser(firstname, lastname, username, 3, hashedPassword);
+        await db.addUser(firstname, lastname, username, 1, hashedPassword);
         res.redirect("/login");
     } catch (error) {
-        console.error(error);
         next(error);
     }
 });
